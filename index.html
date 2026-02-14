@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Валентинка 💖</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(180deg, #ffe6f0, #fff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Arial", sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .card {
+            width: 90%;
+            max-width: 360px;
+            background: white;
+            padding: 30px 20px 60px;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+            position: relative;
+        }
+
+        h1 {
+            color: #ff4d88;
+            font-size: 26px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 22px;
+        }
+
+        button {
+            width: 100%;
+            font-size: 22px;
+            padding: 16px;
+            margin-top: 15px;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .yes {
+            background: #ff4d88;
+            color: white;
+        }
+
+        .no {
+            background: #e0e0e0;
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            width: calc(100% - 40px);
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="content">
+        <h1 id="question">Ты будешь моей валентинкой? 💕</h1>
+
+        <button class="yes" onclick="yesClick()">Да!</button>
+        <button class="no" id="noBtn" ontouchstart="moveNo()" onclick="moveNo()">Нет…</button>
+    </div>
+
+    <script>
+        let noTexts = ["Ты уверена?", "Точно?", "Точно-точно?"];
+        let noIndex = 0;
+
+        function moveNo() {
+            const btn = document.getElementById("noBtn");
+            const card = document.querySelector(".card");
+
+            const maxX = card.clientWidth - btn.offsetWidth - 10;
+            const maxY = card.clientHeight - btn.offsetHeight - 10;
+
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            btn.style.left = x + "px";
+            btn.style.top = y + "px";
+
+            if (noIndex < noTexts.length) {
+                document.getElementById("question").innerText = noTexts[noIndex];
+                noIndex++;
+            }
+        }
+
+        function yesClick() {
+            document.getElementById("content").innerHTML = `
+                <h1>Урааа 💖</h1>
+                <p>Я тебя очень сильно люблю,<br>дорогая моя 💕</p>
+            `;
+        }
+    </script>
+</body>
+</html>
